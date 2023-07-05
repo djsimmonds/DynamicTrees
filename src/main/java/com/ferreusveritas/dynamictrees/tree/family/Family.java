@@ -722,6 +722,8 @@ public class Family extends RegistryEntry<Family> implements Resettable<Family> 
     // LEAVES HANDLING
     ///////////////////////////////////////////
 
+    private int leavesBoundsRadius = 3;
+
     /**
      * When destroying leaves, an area is created from the branch endpoints to look for leaves blocks and destroy them.
      * This area is then expanded by a certain size to make sure it covers all the leaves in the canopy.
@@ -729,7 +731,15 @@ public class Family extends RegistryEntry<Family> implements Resettable<Family> 
      * @return the expanded block bounds.
      */
     public BlockBounds expandLeavesBlockBounds(BlockBounds bounds) {
-        return bounds.expand(3);
+        return bounds.expand(leavesBoundsRadius);
+    }
+
+    public void setLeavesBoundsRadius(int leavesBoundsRadius) {
+        this.leavesBoundsRadius = leavesBoundsRadius;
+    }
+
+    public int getLeavesBoundsRadius() {
+        return leavesBoundsRadius;
     }
 
     public boolean isCompatibleDynamicLeaves(Species species, BlockState blockState, BlockGetter blockAccess, BlockPos pos) {
